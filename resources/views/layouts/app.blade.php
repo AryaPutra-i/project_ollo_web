@@ -20,20 +20,26 @@
 
         .logo{
             width: 70px;
+            margin-left: 40px;
             
         }
 
         .nav-link{
             color: white;
-            font-size: 18px;
+            font-size: 14px;
             font-family: 'poppins', sans-serif;
             font-weight: bold;
+            
             
             
         }
 
         .navbar-nav{
             word-spacing: 30px;
+        }
+
+        .nav-item{
+            margin-left: 50px;
         }
 
        
@@ -63,6 +69,8 @@
             </div>
         </div>
     </nav>
+
+    @yield('content-hero')
 
     <div class="container">
         @yield('content')
