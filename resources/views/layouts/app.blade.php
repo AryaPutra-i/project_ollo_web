@@ -9,6 +9,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
 </head>
 
 <body>
@@ -18,31 +19,18 @@
             /* box-shadow: black 0 0ch 8px 0; */
         }
 
-        .logo{
+        .logo {
             width: 70px;
             margin-left: 40px;
-            
+
         }
 
-        .nav-link{
+        .nav-link {
             color: white;
             font-size: 14px;
             font-family: 'poppins', sans-serif;
             font-weight: bold;
-            
-            
-            
         }
-
-        .navbar-nav{
-            word-spacing: 30px;
-        }
-
-        .nav-item{
-            margin-left: 50px;
-        }
-
-       
     </style>
 
     <nav class="navbar navbar-expand-lg">
@@ -55,7 +43,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="position-absolute top-50 start-50 translate-middle " id="navbarNavDropdown">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav list_navbar">
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="#">Home</a>
                     </li>
@@ -72,11 +60,10 @@
 
     @yield('content-hero')
 
-    <div class="container">
-        @yield('content')
-    </div>
+    @yield('content')
 
-
+    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+    @stack('scripts')
 </body>
 
 </html>
