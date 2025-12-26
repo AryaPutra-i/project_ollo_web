@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OLLO - Powering Creators Economy</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/logo ollo.png') }}">
+    <link rel="shortcut icon" href="{{ asset('images/logo.png') }}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
@@ -84,8 +86,8 @@
         }
 
         .btn-admin {
-            background: #FFFFFF;
-            color: #7C4DFF;
+            background: #7C4DFF;
+            color: #FFFFFF;
             padding: 10px 28px;
             border-radius: 8px;
             border: none;
@@ -97,7 +99,7 @@
         }
 
         .btn-admin:hover {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(32, 13, 100, 0.9);
             transform: translateY(-2px);
             box-shadow: 0 4px 20px rgba(255, 255, 255, 0.4);
         }
@@ -450,7 +452,7 @@
         </div>
         <ul class="nav-menu">
             <li><a href="#signout">Login</a></li>
-            <li><a href="#admin" class="btn-admin">ADMIN</a></li>
+            <li><a href="#admin" class="btn-admin">REGISTER</a></li>
         </ul>
     </nav>
 
