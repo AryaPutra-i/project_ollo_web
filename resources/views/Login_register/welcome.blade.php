@@ -80,6 +80,10 @@
             transition: all 0.3s;
         }
 
+        .nav-menu .btn-admin{
+            color: rgb(51, 51, 51);
+        }
+
         .nav-menu a:hover {
             color: #FFFFFF;
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
@@ -96,10 +100,15 @@
             transition: all 0.3s;
             text-decoration: none;
             display: inline-block;
+            
         }
 
         .btn-admin:hover {
+<<<<<<< HEAD
             background: rgba(32, 13, 100, 0.9);
+=======
+            background: #7C4DFF;
+>>>>>>> e275a15c11ca81153433685024cb14484a0f04b9
             transform: translateY(-2px);
             box-shadow: 0 4px 20px rgba(255, 255, 255, 0.4);
         }
