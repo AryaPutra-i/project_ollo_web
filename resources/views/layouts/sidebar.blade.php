@@ -18,7 +18,9 @@
 
         .container-content {
             display: flex;
-            min-height: 100vh;
+            /* height: 100vh; */
+            
+            
         }
 
         .sidebar {
@@ -31,9 +33,11 @@
             transition: all ease-in 0.3s;
         }
 
+
         .sidebar.hide{
             width: 85px;
             transition: all ease-out 0.3s;
+            /* position: sticky; */
         }
 
         .sidebar .description-header {
@@ -131,17 +135,14 @@
 
         /* main panel */
         .main-panel {
-            background-color:aqua;
-            width: 100vw;
-           
+            background-color: #F8F5FF;
+            width: 100vw; 
+            height: 100vh;
+            overflow: hidden;
+            /* box-sizing: border-box; */
         }
 
-        .main-panel h1 {
-            /* text-align: center;
-            justify-items: center; */
-            margin-left: 55px;
-            
-        }
+       
 
         /* toogle menu */
         #menu-button {
@@ -336,7 +337,7 @@
             </div>
         </div>
         <div class="main-panel">
-            <h1>Main Panel</h1>
+            @yield('dashboard-panel')
         </div>
     </div>
 
