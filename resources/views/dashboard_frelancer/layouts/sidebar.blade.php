@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Ollo</title>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
 
     <style>
         * {
@@ -19,6 +21,7 @@
         .container-content {
             display: flex;
             /* height: 100vh; */
+            
             
             
         }
@@ -135,7 +138,6 @@
 
         /* main panel */
         .main-panel {
-            background-color: #F8F5FF;
             width: 100vw; 
             height: 100vh;
             overflow: hidden;
@@ -275,8 +277,8 @@
     <div class="container-content">
         <div class="sidebar">
             <div class="header">
-                <div class="list-item">
-                    <a href="#">
+                <div class="list-item ">
+                    <a href="#" >
                         <img src="{{ asset('images/portofolio.png') }}" alt="" class="icon">
                         <span class="description-header">Online Look & Order</span>
                     </a>
@@ -287,13 +289,13 @@
                 </div>
                 <div class="main-sidebar">
                     <div class="list-item">
-                        <a href="#">
+                        <a href="/dashboard" >
                             <img src="{{ asset('images/dashboard.png') }}" alt="" class="icon-menu">
                             <span class="description">Dashboard</span>
                         </a>
                     </div>
                     <div class="list-item">
-                        <a href="#">
+                        <a href="#" >
                             <img src="{{ asset('images/history.png') }}" alt="" class="icon-menu">
                             <span class="description">History</span>
                         </a>
@@ -349,7 +351,11 @@
             sidebar.classList.toggle('hide');
             console.log('ok')
         })
+
+        feather.replace();
     </script>
+
+    
 </body>
 
 </html>

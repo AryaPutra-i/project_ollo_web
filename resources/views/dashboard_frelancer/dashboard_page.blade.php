@@ -1,4 +1,4 @@
-@extends('layouts.sidebar')
+@extends('dashboard_frelancer.layouts.sidebar')
 
 @section('dashboard-panel')
     <style>
@@ -10,7 +10,9 @@
         }
 
         .main-dashboard {
-            margin: 50px;
+            margin-top: 50px;
+            margin-left: 25px;
+            margin-right: 25px;
             /* display: grid; */
         }
 
@@ -150,11 +152,11 @@
             grid-area: total-pengerjaan;
             /* width: 600px; */
             /* background-color: #ffffff; */
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
             border-radius: 10px;
             place-content: center;
             text-align: center;
             background-size: cover;
+            /* box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.25); */
             box-shadow: inset 7px 7px 20px 2px rgba(0, 0, 0, 0.45);
             background-image: url({{ asset('images/13399000_5238295.jpg') }});
         }
@@ -211,5 +213,7 @@
                 </div>
             </div>
         </header>
+        
+        @include('dashboard_frelancer.posts.index')
     </div>
 @endsection
