@@ -20,8 +20,9 @@
             border-radius: 10px;
             height: 500px;
             width: 400px;
-            color: #ffffff;
-            background-color: #00c3ff;
+            color: #7c4dff;
+            background-color: #ffffff;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
             /* font-weight: bold; */
             /* text-align: center; */
             justify-items: center;
@@ -30,7 +31,8 @@
 
         h2 {
             font-weight: bold;
-            font-size: 1.5em;
+            font-size: 1.8em;
+            
         }
 
         .container .wrapper-form-upload .form-porto {
@@ -63,26 +65,64 @@
                 </div>
             </div>
             <div class="form-porto col">
-                <form>
+                <form method="POST" action="{{ route('dashboard.posts.store') }}" enctype="multipart/form-data">
+                    @csrf
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Judul Portofolio</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <label for="judul_portofolio" class="form-label">Judul Portofolio</label>
+                        <input type="text" class="form-control @error('judul_portofolio') is-invalid @enderror" id="judul_portofolio" name="judul_portofolio" required autofocus value="{{ old('judul_portofolio') }}">
+                        @error('judul_portofolio')
+                            <div class="invalid-feedbaack">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
 
                     <div class="mb-3">
-                        <label for="exampleFormControlTextarea1" class="form-label">Deskripsi Portofolio</label>
-                        <textarea class="form-control descripsi-area" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        <label for="slug" class="form-label">Slug</label>
+                        <div id="sluginfo" class="form-text">Slug otomatis terisi sesuai title atau bisa di isi sendiri</div>
+                        <input type="text" class="form-control @error('slug')
+                            is-invalid
+                        @enderror" id="slug" name="slug" required value="{{ old('slug') }}">
+
+                        @error('slug')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="detail_portofolio" class="form-label">Deskripsi Portofolio</label>
+                        <textarea class="form-control descripsi-area" id="detail_portofolio" rows="3" name="detail_portofolio"></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="formFile" class="form-label">Upload Portofolio</label>
-                        <input class="form-control" type="file" id="formFile">
+                        <input class="form-control" type="file" id="formFile" name="image">
                     </div>
-                    <a href="#" type="submit" class="btn btn-primary">
-                        <span data-feather="upload"></span>
-                        Submit
-                    </a>
+                    <button type="submit" class="btn btn-primary" > <span data-feather="upload"></span> Submit</button>
                 </form>
             </div>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+    $('#judul_portofolio').on('change', function() {
+        let judul_portofolio = $(this).val();
+        
+        $.ajax({
+            url: '/dashboard/posts/checkSlug',
+            type: 'GET',
+            data: {judul_portofolio: judul_portofolio },
+            dataType: 'json',
+            success: function(data) {
+                // Mengisi value input slug secara otomatis
+                $('#slug').val(data.slug);
+            },
+            error: function(xhr) {
+                console.error("Gagal mengambil slug: " + xhr.responseText);
+            }
+        });
+    });
+</script>
 @endsection

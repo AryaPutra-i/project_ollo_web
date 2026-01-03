@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('portofolios', function (Blueprint $table) {
-            $table->id('portofolio_id');
-            $table->string('slug_portofolio')->unique();
+            $table->id();
             $table->string('judul_portofolio');
+            $table->string('slug')->unique();
             $table->text('detail_portofolio');
             $table->string('image')->nullable();
             $table->timestamps();

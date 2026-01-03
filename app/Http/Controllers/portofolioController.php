@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\portofolio;
+use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 
 class portofolioController extends Controller
@@ -12,8 +13,11 @@ class portofolioController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        //
+    {   
+        
+        $porto = portofolio::all();
+        return view('dashboard_frelancer.dashboard_page', compact('porto'));
+            
     }
 
     /**
@@ -29,7 +33,17 @@ class portofolioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        
+        $validatedData = $request->validate([
+            'judul_portofolio' => 'required|max:255',
+            'slug' => 'required|unique:portofolios',
+            'detail_portofolio' => 'required'
+        ]);
+
+        portofolio::create($validatedData);
+        return redirect()->route('dashboard.posts.index')->with('success', 'design berhasil terupload');
+
     }
 
     /**
@@ -62,5 +76,10 @@ class portofolioController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function checkSlug(Request $request){
+        $slug = SlugService::createSlug(portofolio::class, 'slug', $request->judul_portofolio);
+        return response()->json(['slug' => $slug]);
     }
 }

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -288,7 +287,7 @@
                     <img src="{{ asset('images/logo ollo.png') }}" alt="" class="logo">
                 </div>
                 <div class="main-sidebar">
-                    <div class="list-item">
+                    <div class="list-item {{ Request::is('dashboard/posts')? 'active' : '' }}">
                         <a href="/dashboard" >
                             <img src="{{ asset('images/dashboard.png') }}" alt="" class="icon-menu">
                             <span class="description">Dashboard</span>
