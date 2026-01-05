@@ -13,11 +13,13 @@ class portofolioController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {   
-        
-        $porto = portofolio::all();
-        return view('dashboard_frelancer.dashboard_page', compact('porto'));
-            
+    {
+
+
+
+        return view('dashboard_frelancer.dashboard_page', [
+            'porto' => portofolio::all()
+        ]);
     }
 
     /**
@@ -33,31 +35,40 @@ class portofolioController extends Controller
      */
     public function store(Request $request)
     {
-        
-        
+
+
         $validatedData = $request->validate([
             'judul_portofolio' => 'required|max:255',
             'slug' => 'required|unique:portofolios',
-            'detail_portofolio' => 'required'
+            'detail_portofolio' => 'required',
+            'image' => 'required|image|file|max:10240'
         ]);
 
-        portofolio::create($validatedData);
-        return redirect()->route('dashboard.posts.index')->with('success', 'design berhasil terupload');
+        $validatedData['image'] = $request->file('image')->store('post-images');
 
+        portofolio::create($validatedData);
+        return redirect('/dashboard/posts')->with('success', 'design berhasil terupload');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($porto)
     {
-        //
+        $lihat = portofolio::where('id', $porto)
+            ->orWhere('slug', $porto)
+            ->first();
+
+        if (!$lihat) {
+            abort(404, 'Data pengguna tidak ditemukan');
+        }
+        return view('dashboard_frelancer.posts.show', compact('lihat'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(portofolio $porto)
     {
         //
     }
@@ -65,7 +76,7 @@ class portofolioController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, portofolio $porto)
     {
         //
     }
@@ -73,12 +84,16 @@ class portofolioController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+
+
+        portofolio::destroy($id);
+        return redirect('/dashboard/posts')->with('success', 'design berhasil terhapus');
     }
 
-    public function checkSlug(Request $request){
+    public function checkSlug(Request $request)
+    {
         $slug = SlugService::createSlug(portofolio::class, 'slug', $request->judul_portofolio);
         return response()->json(['slug' => $slug]);
     }

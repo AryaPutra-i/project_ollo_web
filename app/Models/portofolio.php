@@ -8,10 +8,10 @@ use Cviebrock\EloquentSluggable\Sluggable;
 class portofolio extends Model
 {
     use Sluggable;
-    // protected $table = 'portofolios';
+    protected $table = 'portofolios';
     // protected $primary = 'id';
 
-    protected $fillable = ['judul_portofolio','slug','detail_portofolio'];
+    protected $fillable = ['judul_portofolio','slug','detail_portofolio','image'];
 
     public function sluggable(): array
     {

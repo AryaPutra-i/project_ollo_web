@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('judul_portofolio');
             $table->string('slug')->unique();
             $table->text('detail_portofolio');
-            $table->string('image')->nullable();
+            $table->string('image');
             $table->timestamps();
         });
     }

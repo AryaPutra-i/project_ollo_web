@@ -7,8 +7,14 @@
 </style>
 
 <div class="table-upload table-responsive">
+    @if (session()->has('success'))
+
+        <div class="alert alert-success mt-3" role="alert">
+            {{ session('success') }}
+        </div>
+    @endif
     <div class="tombol-upload mt-5">
-        <a class="btn btn-primary" href="{{ route('dashboard.posts.create') }}" role="button"> <span data-feather="upload"></span> Upload
+        <a class="btn btn-primary" href="/dashboard/posts/create" role="button"> <span data-feather="upload"></span> Upload
             Portofolio</a>
     </div>
     <table class="table table-hover table-bordered border-dark mt-3 ">
@@ -19,26 +25,31 @@
             <th scope="col">Manage</th>
         </thead>
         <tbody>
-            
+
             @foreach ($porto as $item)
                 <tr>
-                    <th>{{ $loop->iteration }}</th>
+                    <td>{{ $loop->iteration }}</td>
                     <td>{{ $item->judul_portofolio }}</td>
                     <td>{{ $item->detail_portofolio }}</td>
                     <td>
-                        <a href="" type="button" class="tombol-manage btn btn-success btn-sm"><span
+                        <a href="{{ route('posts.show', $item->slug) }}" type="button" class="tombol-manage btn btn-success btn-sm"><span
                                 data-feather="eye"></span> View</a>
                         <a href="" type="button" class="tombol-manage btn btn-warning btn-sm"><span
                                 data-feather="edit"></span> Edit</a>
-                        <a href="" type="button" class="tombol-manage btn btn-danger btn-sm"><span
-                                data-feather="trash-2"></span> Delete</a>
+
+                        <form action="{{ route('posts.destroy', $item->id) }}" method="POST" class="d-inline">
+                            @method('DELETE')
+                            @csrf
+                            <button class="tombol-manage btn btn-danger btn-sm"
+                                onclick="return confirm('Apakah kamu yakin?')"> <span data-feather="trash-2"></span>
+                                Delete</button>
+                        </form>
                     </td>
                 </tr>
-
             @endforeach
-                
-                
-                
+
+
+
         </tbody>
     </table>
 

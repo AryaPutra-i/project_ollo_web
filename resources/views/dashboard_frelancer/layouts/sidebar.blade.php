@@ -19,7 +19,8 @@
 
         .container-content {
             display: flex;
-            /* height: 100vh; */
+            /* position: fixed; */
+
             
             
             
@@ -27,12 +28,18 @@
 
         .sidebar {
             background-color: #2C2C2C;
-            width: 268px;  
+            width: 268px;
+            height: 120vh;
             /* width: 87px; */
             padding: 20px;
             display: flex;
+            /* flex-direction: row; */
+            /* position: fixed; */
             box-sizing: border-box;
             transition: all ease-in 0.3s;
+            /* overflow: auto; */
+
+           
         }
 
 
@@ -138,8 +145,9 @@
         /* main panel */
         .main-panel {
             width: 100vw; 
-            height: 100vh;
-            overflow: hidden;
+            height: 100%;
+            padding: 20px;
+            /* overflow: hidden; */
             /* box-sizing: border-box; */
         }
 
@@ -170,6 +178,7 @@
             width: 100%;
             height: 4px;
             background-color:#2C2C2C;
+            /* background-color:#ffffff; */
 
         }
 
@@ -274,7 +283,7 @@
 
 <body>
     <div class="container-content">
-        <div class="sidebar">
+        <div class="sidebar" >
             <div class="header">
                 <div class="list-item ">
                     <a href="#" >
@@ -288,7 +297,7 @@
                 </div>
                 <div class="main-sidebar">
                     <div class="list-item {{ Request::is('dashboard/posts')? 'active' : '' }}">
-                        <a href="/dashboard" >
+                        <a href="/dashboard/posts" >
                             <img src="{{ asset('images/dashboard.png') }}" alt="" class="icon-menu">
                             <span class="description">Dashboard</span>
                         </a>
@@ -351,7 +360,7 @@
             console.log('ok')
         })
 
-        feather.replace();
+        feather.replace();          
     </script>
 
     
