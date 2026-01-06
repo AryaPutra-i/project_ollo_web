@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\portofolio;
+use Illuminate\Support\Facades\Storage;     
 use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 
@@ -83,9 +84,43 @@ class portofolioController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, portofolio $porto)
+    public function update(Request $request, $porto)
     {
-        //
+        $update_portofolio = portofolio::where('id', $porto)
+            ->orWhere('slug', $porto)
+            ->first();
+
+         $rules = [
+            'judul_portofolio' => 'required|max:255',
+            'slug' => 'required|unique:portofolios',
+            'detail_portofolio' => 'required',
+            'image' => 'required|image|file|max:10240'
+        ];
+
+        if($request->slug != $update_portofolio->slug){
+            $rules['slug'] = 'required|unique:portofolios';
+        }
+        
+        $validatedData = $request->validate($rules);
+
+        if ($request->file('image')) {
+
+            if ($request->oldImage) {
+                Storage::delete($request->oldImage);
+            }
+
+            $validatedData['image'] = $request->file('image')->store('post-images');
+        }
+        
+        portofolio::where('id', $update_portofolio->id)
+            ->update($validatedData);
+
+        return redirect('/dashboard/posts')->with('success', 'design berhasil diupdate');  
+
+
+
+
+        
     }
 
     /**

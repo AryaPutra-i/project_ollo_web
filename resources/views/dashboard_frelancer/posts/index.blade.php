@@ -34,7 +34,7 @@
                     <td>
                         <a href="{{ route('posts.show', $item->slug) }}" type="button" class="tombol-manage btn btn-success btn-sm"><span
                                 data-feather="eye"></span> View</a>
-                        <a href="" type="button" class="tombol-manage btn btn-warning btn-sm"><span
+                        <a href="{{route('posts.edit', $item->slug)}}" type="button" class="tombol-manage btn btn-warning btn-sm"><span
                                 data-feather="edit"></span> Edit</a>
 
                         <form action="{{ route('posts.destroy', $item->id) }}" method="POST" class="d-inline">
