@@ -14,7 +14,12 @@
                 <div class="row g-0 ">
                     <div class="col-md-5 d-flex align-items-center justify-content-center p-4 wrapper-preview">
                         <div class="shadow-sm rounded" style="overflow: hidden; border: 8px solid rgb(255, 255, 255);">  
-                                <img src="{{ asset('storage/' . $edit_halaman->image) }}" class="img-fluid" alt="Preview">
+                            @if(!$edit_halaman->image)
+                            <img class="img-fluid img-preview" alt="Preview">
+                            
+                            @else
+                            <img src="{{ asset('storage/' . $edit_halaman->image) }}" class="img-fluid" alt="Preview">
+                            @endif
                         </div>
                     </div>
 
@@ -58,7 +63,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="formFile" class="form-label">Upload Portofolio</label>
-                        <img class="img-preview img-fluid mb-3 col-sm-4">
+                        <!-- <img class="img-preview img-fluid mb-3 col-sm-4"> -->
                         <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image" required onchange="previewImage()">
                         @error('image')
                             <div class="invalid-feedback">
@@ -85,4 +90,34 @@
         </div>
     </div>
 </div>
+
+<script>
+     const title = document.querySelector('#judul_portofolio');
+    const slug = document.querySelector('#slug');
+
+
+    title.addEventListener('change', function(){
+        fetch('/dashboard/posts/checkSlug?judul_portofolio=' + title.value)
+            .then(response => response.json())
+            .then(data => slug.value = data.slug)
+    });
+
+
+
+    function previewImage(){
+        const image = document.querySelector('#image');
+        const imgPreview = document.querySelector('.img-preview');
+
+        imgPreview.style.display = 'block';
+
+        const oFReader = new FileReader();
+        oFReader.readAsDataURL(image.files[0]);
+
+
+        oFReader.onload = function(oFREvent) {
+            imgPreview.src = oFREvent.target.result;
+
+        }
+    }
+</script>
 @endsection
