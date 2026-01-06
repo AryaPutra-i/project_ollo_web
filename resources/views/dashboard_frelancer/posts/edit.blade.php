@@ -1,8 +1,7 @@
 @extends('dashboard_frelancer.layouts.sidebar')
 
 @section('dashboard-panel')
-
-<style>
+    <style>
    .wrapper-preview{
     background-color: #74c;
    }
@@ -61,6 +60,4 @@
         </div>
     </div>
 </div>
-
-
 @endsection

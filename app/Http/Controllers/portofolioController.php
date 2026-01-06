@@ -68,9 +68,16 @@ class portofolioController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(portofolio $porto)
+    public function edit($porto)
     {
-        //
+        $edit_halaman = portofolio::where('id', $porto)
+            ->orWhere('slug', $porto)
+            ->first();
+        
+        if (!$edit_halaman) {
+            abort(404, 'Data pengguna tidak ditemukan');
+        }
+        return view('dashboard_frelancer.posts.edit', compact('edit_halaman'));
     }
 
     /**
