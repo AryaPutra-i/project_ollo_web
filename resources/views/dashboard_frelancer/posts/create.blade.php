@@ -61,7 +61,7 @@
 
                     <div class="mb-3">
                         <label for="detail_portofolio" class="form-label">Deskripsi Portofolio</label>
-                        <textarea class="form-control descripsi-area" id="detail_portofolio" rows="3" name="detail_portofolio"></textarea>
+                        <textarea class="form-control descripsi-area" id="detail_portofolio" rows="3" name="detail_portofolio" required></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="formFile" class="form-label">Upload Portofolio</label>

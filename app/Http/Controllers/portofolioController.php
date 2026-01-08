@@ -17,7 +17,7 @@ class portofolioController extends Controller
     {
 
 
-
+        
         return view('dashboard_frelancer.dashboard_page', [
             'porto' => portofolio::all()
         ]);
@@ -92,9 +92,8 @@ class portofolioController extends Controller
 
          $rules = [
             'judul_portofolio' => 'required|max:255',
-            'slug' => 'required|unique:portofolios',
             'detail_portofolio' => 'required',
-            'image' => 'required|image|file|max:10240'
+            'image' => 'image|file|max:10240'
         ];
 
         if($request->slug != $update_portofolio->slug){
@@ -138,5 +137,10 @@ class portofolioController extends Controller
     {
         $slug = SlugService::createSlug(portofolio::class, 'slug', $request->judul_portofolio);
         return response()->json(['slug' => $slug]);
+    }
+
+    public function viewWrapper(){
+        $porto = portofolio::all();
+        return view('katalog_portofolio.index', compact('porto'));
     }
 }

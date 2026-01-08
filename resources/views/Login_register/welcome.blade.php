@@ -84,14 +84,19 @@
             color: rgb(51, 51, 51);
         }
 
-        .nav-menu a:hover {
+        .nav-menu .btn-admin:hover {
             color: #FFFFFF;
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         }
 
+        .link-login:hover{
+            color: rgba(32, 13, 100, 0.9);
+            text-shadow: 0 0 15px rgb(255, 255, 255);
+        }
+
         .btn-admin {
-            background: #7C4DFF;
-            color: #FFFFFF;
+            background: #ffffff;
+            /* color: #000000; */
             padding: 10px 28px;
             border-radius: 8px;
             border: none;
@@ -104,11 +109,7 @@
         }
 
         .btn-admin:hover {
-<<<<<<< HEAD
             background: rgba(32, 13, 100, 0.9);
-=======
-            background: #7C4DFF;
->>>>>>> e275a15c11ca81153433685024cb14484a0f04b9
             transform: translateY(-2px);
             box-shadow: 0 4px 20px rgba(255, 255, 255, 0.4);
         }
@@ -460,7 +461,7 @@
             <img src="{{ asset('images/logo ollo.png') }}" alt="OLLO" style="height: 50px; width: auto;">
         </div>
         <ul class="nav-menu">
-            <li><a href="#signout">Login</a></li>
+            <li><a href="{{ route('login') }}" class="link-login">Login</a></li>
             <li><a href="#admin" class="btn-admin">REGISTER</a></li>
         </ul>
     </nav>

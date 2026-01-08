@@ -293,7 +293,10 @@
                 </div>
 
                 <div class="logo-ollo">
-                    <img src="{{ asset('images/logo ollo.png') }}" alt="" class="logo">
+                    <a href="{{ route('katalog') }}">
+
+                        <img src="{{ asset('images/logo ollo.png') }}" alt="" class="logo">
+                    </a>
                 </div>
                 <div class="main-sidebar">
                     <div class="list-item {{ Request::is('dashboard/posts')? 'active' : '' }}">

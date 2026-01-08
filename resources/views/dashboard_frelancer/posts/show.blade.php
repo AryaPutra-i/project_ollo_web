@@ -47,7 +47,7 @@
                             </div>
 
                             <div class="d-grid gap-2 d-md-flex justify-content-md-start mt-4">
-                                <a href="#" class="btn btn-primary px-4 shadow-sm">
+                                <a href="{{ route('posts.edit', $lihat->slug) }}" class="btn btn-primary px-4 shadow-sm">
                                     <span data-feather="edit"></span> Edit Portofolio
                                 </a>
                                 <a href="{{ route('posts.index') }}" class="btn btn-outline-dark px-4">

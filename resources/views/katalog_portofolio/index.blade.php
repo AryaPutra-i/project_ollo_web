@@ -155,13 +155,10 @@
 
     <div class="card_item px-5 px-md-5 mt-3 swiper myswiper">
         <div class="swiper-wrapper">
-            <img src="{{ asset('images/Challenge design 1.jpg') }}" alt="design1" class="design_aku mx-2 swiper-slide">
-            <img src="{{ asset('images/arya_api-Thanks for ae.jpg') }}" alt="design2" class="design_aku mx-2 swiper-slide">
-            <img src="{{ asset('images/arya_api_super brief 2.jpg') }}" alt="design3" class="design_aku mx-2 swiper-slide">
-            <img src="{{ asset('images/challenge design 4 rev.jpg') }}" alt="design4" class="design_aku mx-2 swiper-slide">
-            <img src="{{ asset('images/Challenge design 3.jpg') }}" alt="design5" class="design_aku mx-2 swiper-slide">
-            <img src="{{ asset('images/Challenge design 2 revisi.jpg') }}" alt="design6"
-                class="design_aku mx-2 swiper-slide">
+            @foreach ( $porto as $view)
+                
+            <img src="{{ asset('storage/' . $view->image) }}" alt="{{ $view->slug }}" class="design_aku mx-2 swiper-slide">
+            @endforeach
         </div>
         <div class="swiper-pagination"></div>
         <div class="swiper-button-prev"></div>
@@ -207,17 +204,17 @@
             breakpoints: {
                 // when window width is >= 640px
                 640: {
-                    slidesPerView: 2,
+                    slidesPerView: 1,
                     spaceBetween: 20
                 },
                 // when window width is >= 768px
                 768: {
-                    slidesPerView: 3,
+                    slidesPerView: 2,
                     spaceBetween: 30
                 },
                 // when window width is >= 1024px
                 1024: {
-                    slidesPerView: 4,
+                    slidesPerView: 3,
                     spaceBetween: 30
                 }
             }

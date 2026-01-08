@@ -6,7 +6,11 @@ use App\Http\Controllers\portofolioController;
 
 Route::get('/', function () {
     return view('Login_register.welcome');
-});
+})->name('welcome');
+
+Route::get('/login', function () {
+    return view('Login_register.login');
+})->name('login');
 
 Route::get('/dashboard/posts/show', function () {
     // $porto = portofolio::find('id');
@@ -17,12 +21,8 @@ Route::get('/dashboard/posts/checkSlug', [portofolioController::class, 'checkSlu
 Route::resource('/dashboard/posts', portofolioController::class);
 
 
-Route::get('/katalog', function () {
-    return view('katalog_portofolio.index');
-});
+Route::get('/katalog', [portofolioController::class, 'viewWrapper'])->name('katalog');
 
-Route::get('/welcome', function () {
-    return view('Login_register.welcome');
-});
+
 
 
