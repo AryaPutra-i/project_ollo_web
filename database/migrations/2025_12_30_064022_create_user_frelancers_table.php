@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('user_frelancers', function (Blueprint $table) {
             $table->id('frelance_id');
+            $table->string('nama_lengkap');
             $table->string('username')->unique();
             $table->string('password');
-            $table->string('email');
-            $table->integer('no_telepon');
+            $table->string('email')->unique();
+            $table->integer('no_telepon')->unique();
             $table->string('profesi');
             $table->timestamps();
         });

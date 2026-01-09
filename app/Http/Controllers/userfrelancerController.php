@@ -3,15 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\user_frelancer as UserFreelancer;
 
-class user_frelancer extends Controller
+class userfrelancerController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return view('Login_register.register');
     }
 
     /**
@@ -27,6 +28,15 @@ class user_frelancer extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nama_lengkap' => 'required|max:255',
+            'username' => 'required|unique:user_frelancers|min:5|max:255',
+            'password' => 'required|min:8|max:255',
+            'email' => 'required|email|unique:user_frelancers',
+            'no_telepon' => 'required|unique:user_frelancers',
+            'profesi'=> 'required'
+
+        ]);
         //
     }
 

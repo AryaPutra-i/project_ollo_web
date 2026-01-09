@@ -462,7 +462,7 @@
         </div>
         <ul class="nav-menu">
             <li><a href="{{ route('login') }}" class="link-login">Login</a></li>
-            <li><a href="#admin" class="btn-admin">REGISTER</a></li>
+            <li><a href="{{ route('register.index') }}" class="btn-admin">REGISTER</a></li>
         </ul>
     </nav>
 

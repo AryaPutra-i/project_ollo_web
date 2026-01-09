@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\portofolioController;
-
+use App\Http\Controllers\userfrelancerController;
 
 Route::get('/', function () {
     return view('Login_register.welcome');
@@ -11,6 +11,8 @@ Route::get('/', function () {
 Route::get('/login', function () {
     return view('Login_register.login');
 })->name('login');
+
+route::resource('/register', userfrelancerController::class);
 
 Route::get('/dashboard/posts/show', function () {
     // $porto = portofolio::find('id');
