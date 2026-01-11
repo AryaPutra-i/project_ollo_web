@@ -17,8 +17,9 @@ return new class extends Migration
             $table->string('username')->unique();
             $table->string('password');
             $table->string('email')->unique();
-            $table->integer('no_telepon')->unique();
+            $table->biginteger('no_telepon')->unique();
             $table->string('profesi');
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }

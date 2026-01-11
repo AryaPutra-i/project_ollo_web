@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\portofolio;
-use Illuminate\Support\Facades\Storage;     
+use App\Models\user_frelancer;
+use Illuminate\Support\Facades\Storage;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 
@@ -17,7 +18,7 @@ class portofolioController extends Controller
     {
 
 
-        
+
         return view('dashboard_frelancer.dashboard_page', [
             'porto' => portofolio::all()
         ]);
@@ -58,7 +59,12 @@ class portofolioController extends Controller
     {
         $lihat = portofolio::where('id', $porto)
             ->orWhere('slug', $porto)
+            ->with('freelancer')
             ->first();
+
+
+        // Get user with all portfolios
+       
 
         if (!$lihat) {
             abort(404, 'Data pengguna tidak ditemukan');
@@ -73,8 +79,9 @@ class portofolioController extends Controller
     {
         $edit_halaman = portofolio::where('id', $porto)
             ->orWhere('slug', $porto)
+            ->with('freelancer')
             ->first();
-        
+
         if (!$edit_halaman) {
             abort(404, 'Data pengguna tidak ditemukan');
         }
@@ -88,18 +95,19 @@ class portofolioController extends Controller
     {
         $update_portofolio = portofolio::where('id', $porto)
             ->orWhere('slug', $porto)
+            ->with('freelancer')
             ->first();
 
-         $rules = [
+        $rules = [
             'judul_portofolio' => 'required|max:255',
             'detail_portofolio' => 'required',
             'image' => 'image|file|max:10240'
         ];
 
-        if($request->slug != $update_portofolio->slug){
+        if ($request->slug != $update_portofolio->slug) {
             $rules['slug'] = 'required|unique:portofolios';
         }
-        
+
         $validatedData = $request->validate($rules);
 
         if ($request->file('image')) {
@@ -110,16 +118,11 @@ class portofolioController extends Controller
 
             $validatedData['image'] = $request->file('image')->store('post-images');
         }
-        
+
         portofolio::where('id', $update_portofolio->id)
             ->update($validatedData);
 
-        return redirect('/dashboard/posts')->with('success', 'design berhasil diupdate');  
-
-
-
-
-        
+        return redirect('/dashboard/posts')->with('success', 'design berhasil diupdate');
     }
 
     /**
@@ -139,7 +142,8 @@ class portofolioController extends Controller
         return response()->json(['slug' => $slug]);
     }
 
-    public function viewWrapper(){
+    public function viewWrapper()
+    {
         $porto = portofolio::all();
         return view('katalog_portofolio.index', compact('porto'));
     }

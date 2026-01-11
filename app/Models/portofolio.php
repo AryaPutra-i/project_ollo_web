@@ -13,6 +13,10 @@ class portofolio extends Model
 
     protected $fillable = ['judul_portofolio','slug','detail_portofolio','image'];
 
+    public function freelancer(){
+        return $this->belongTo(user_frelancer::class, 'frelance_id', 'frelance_id');
+    }
+
     public function sluggable(): array
     {
         return [

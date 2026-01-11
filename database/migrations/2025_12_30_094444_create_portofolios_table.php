@@ -18,6 +18,9 @@ return new class extends Migration
             $table->text('detail_portofolio');
             $table->string('image');
             $table->timestamps();
+
+            //foreign key user_frelance
+            $table->foreignId('frelance_id')->references('frelance_id')->on('user_frelancers')->onDelete('cascade');
         });
     }
 
