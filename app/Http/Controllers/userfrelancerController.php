@@ -121,7 +121,9 @@ class userfrelancerController extends Controller
     }
 
     public function viewDashboardAdmin(){
-        return view('dashboard_admin.main_panel.index');
+
+        $approvedFrelancers = user_frelancer::where('status', true)->get();
+        return view('dashboard_admin.main_panel.index', compact('approvedFrelancers'));
     }
 
     public function viewVerfikasiUser(){
@@ -141,5 +143,13 @@ class userfrelancerController extends Controller
         $freelancer = user_frelancer::find($id);
         $freelancer->update(['status' => false]);
         return redirect()->back()->with('success', 'Account rejected');
+    }
+
+    public function logout(Request $request){
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerate();
+        return redirect('/register/showLogin');
     }
 }

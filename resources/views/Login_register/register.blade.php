@@ -303,7 +303,7 @@
                         <option value="content_creator">Content Creator</option>
                         <option value="photographer">Photographer</option>
                         <option value="videographer">Videographer</option>
-                        <option value="other">Lainnya</option>
+                        <option value="lainnya">Lainnya</option>
                     </select>
                 </div>
 

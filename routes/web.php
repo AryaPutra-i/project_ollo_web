@@ -15,6 +15,7 @@ route::get('/register/dashboardAdmin', [userfrelancerController::class, 'viewDas
 route::get('/register/verifikasiUser', [userfrelancerController::class, 'viewVerfikasiUser'])->name('verifikasi');
 route::post('/register/approve/{id}', [userfrelancerController::class, 'approve'])->name('freelancer.approve');
 route::post('/register/reject/{id}', [userfrelancerController::class, 'reject'])->name('freelancer.reject');
+route::post('/logout', [userfrelancerController::class, 'logout'])->name('logout');
 route::resource('/register', userfrelancerController::class);
 
 Route::get('/dashboard/posts/show', function () {
