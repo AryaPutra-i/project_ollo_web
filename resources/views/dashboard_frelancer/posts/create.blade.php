@@ -33,7 +33,7 @@
     <div class="container mt-5">
         <h1 class="header-upload-page">Upload Portofolio</h1>
        <div class="form-porto mt-5">
-                <form method="POST" action="/dashboard/posts" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('posts.store') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label for="judul_portofolio" class="form-label">Judul Portofolio</label>

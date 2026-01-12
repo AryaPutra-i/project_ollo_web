@@ -16,9 +16,6 @@ class portofolioController extends Controller
      */
     public function index()
     {
-
-
-
         return view('dashboard_frelancer.dashboard_page', [
             'porto' => portofolio::all()
         ]);
@@ -37,8 +34,6 @@ class portofolioController extends Controller
      */
     public function store(Request $request)
     {
-
-
         $validatedData = $request->validate([
             'judul_portofolio' => 'required|max:255',
             'slug' => 'required|unique:portofolios',
@@ -47,8 +42,9 @@ class portofolioController extends Controller
         ]);
 
         $validatedData['image'] = $request->file('image')->store('post-images');
+        
+        $request->user()->portofolios()->create($validatedData);
 
-        portofolio::create($validatedData);
         return redirect('/dashboard/posts')->with('success', 'design berhasil terupload');
     }
 

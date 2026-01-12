@@ -77,7 +77,7 @@ class userfrelancerController extends Controller
         }
 
         // Check if account is approved
-        if (!$user->is_approved) {
+        if (!$user->status) {
             return back()->with('email', 'Your account is not approved yet. Please wait for admin verification.');
         }
 

@@ -11,10 +11,10 @@ class portofolio extends Model
     protected $table = 'portofolios';
     // protected $primary = 'id';
 
-    protected $fillable = ['judul_portofolio','slug','detail_portofolio','image'];
+    protected $fillable = ['frelance_id', 'judul_portofolio', 'slug', 'detail_portofolio', 'image'];
 
     public function freelancer(){
-        return $this->belongTo(user_frelancer::class, 'frelance_id', 'frelance_id');
+        return $this->belongsTo(user_frelancer::class, 'frelance_id', 'frelance_id');
     }
 
     public function sluggable(): array
