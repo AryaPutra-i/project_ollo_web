@@ -22,41 +22,23 @@
         }
 
         .logo {
-            width: 70px;
+            width: 80px;
             margin-left: 40px;
 
         }
 
-        .nav-link {
-            color: white;
-            font-size: 14px;
-            font-family: 'poppins', sans-serif;
-            font-weight: bold;
-        }
+        
     </style>
 
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="/dashboard/posts">
                 <img class="logo" src="{{ asset('images/logo ollo.png') }}" alt="Ollo">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="position-absolute top-50 start-50 translate-middle " id="navbarNavDropdown">
-                <ul class="navbar-nav list_navbar">
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
-                    </li>
-                </ul>
-            </div>
         </div>
     </nav>
 

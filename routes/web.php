@@ -23,6 +23,10 @@ Route::get('/dashboard/posts/show', function () {
     return view('dashboard_frelancer.posts.show');
 });
 
+route::get('/booking', function () {
+    return view ('booking.show');
+}); 
+
 
 Route::get('/dashboard/posts/checkSlug', [portofolioController::class, 'checkSlug']);
 Route::middleware(['auth'])->group(function () {

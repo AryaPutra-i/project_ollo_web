@@ -57,7 +57,7 @@
         <div class="deskripsi ">
             <h1 class="name">{{ auth()->user()->nama_lengkap }}</h1>
             <h2 class="profesi">{{ auth()->user()->profesi }}</h2>
-            <button type="button" class="btn btn-primary btn-lg tombol">Booking Design</button>
+            <a href="/booking" type="button" class="btn btn-primary btn-lg tombol">Booking Design</a>
         </div>
     </div>
 @endsection
@@ -93,7 +93,7 @@
 
         .design_aku {
             /* width: 740px; */
-            height: 780px;
+            height: 750px;
             object-fit: cover;
             border-radius: 10px;
         }
@@ -149,6 +149,67 @@
             font-size: 20px;
         }
 
+        .box{
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            /* box-shadow: 0 4px 8px rgba(0,0,0,0.2); */
+        }
+
+        .box .design_aku{
+            width: 100%;
+            border-radius: 10px;
+            /* display: block; */
+            transition: transform 0.5s ease;
+        }
+
+         .overlay{
+            height: 0;
+            width: 100%;
+            background : linear-gradient(transparent, #1c1c1c 60%);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            border-radius: 10px;
+            overflow: hidden;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            transition: height 0.5s ease;
+            color: white;
+            padding: 0 40px;
+            font-size: 16px;
+        } 
+
+        .overlay .detail-text{
+            font-family: "poppins", sans-serif;
+            font-size: 16px;
+            letter-spacing: 1px;
+        }
+
+        .overlay .judul-text{
+            
+            font-weight: bold;
+            margin-bottom: 5px;
+            margin-top: 10px;
+            font-family: "poppins", sans-serif;
+            font-size: 30px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.5);
+        }
+
+        .boxlhover .design_aku{
+            transform: scale(1.1);
+        }
+
+        .box:hover .overlay{
+            height: 20%;
+        }
+
+
+
         
 
 
@@ -160,10 +221,17 @@
     </div>
 
     <div class="card_item px-5 px-md-5 mt-3 swiper myswiper">
-        <div class="swiper-wrapper">
+        <div class="swiper-wrapper ">
             @foreach ( $porto as $view)
-                
-            <img src="{{ asset('storage/' . $view->image) }}" alt="{{ $view->slug }}" class="design_aku mx-2 swiper-slide">
+            <div class="box swiper-slide">
+                <img src="{{ asset('storage/' . $view->image) }}" alt="{{ $view->slug }}" class="design_aku mx-2 ">
+                <div class="overlay">
+                    <h3 class= "judul-text">{{ $view->judul_portofolio }}</h3>
+                    <p class="detail-text">{{ $view->detail_portofolio }}</p>
+                </div>
+            </div>
+
+            
             @endforeach
         </div>
         <div class="swiper-pagination"></div>

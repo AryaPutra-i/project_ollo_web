@@ -89,6 +89,7 @@
         }
 
 
+
         .profil .isi-profil .biodata {
             display: flex;
             flex-direction: column;
@@ -193,17 +194,17 @@
             <div class="profil">
                 <h2 class="heading">User Account</h2>
                 <div class="isi-profil">
-                    <img src="{{ asset('images/image_profil.JPG') }}" alt="" class="profil-image">
+                    <img src="{{ asset('images\ferr-studio-G2Qjx1y9aAM-unsplash.jpg') }}" alt="" class="profil-image">
                     <div class="biodata">
                         <h2 class="nama">{{ auth()->user()->nama_lengkap }}</h2>
                         <h3 class="profesi">{{ auth()->user()->profesi }}</h3>
                         <p class="link-url">Link Url :
-                            <a href="" class="link-asli">https://www.sample.org/plot</a>
+                            <a href="{{route('katalog', ['username' => auth()->user()->username])}}" class="link-asli ">https://katalog/{{auth()->user()->username}}</a>
                         </p>
                     </div>
-                    <div class="tombol">
+                    <!-- <div class="tombol">
                         <button type="button" class="tombol-share">➦ Share</button>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="total-pengerjaan">

@@ -158,9 +158,12 @@ class portofolioController extends Controller
     public function viewWrapper()
     {
         $user = Auth::user();
-        $porto = portofolio::all();
+        
         if ($user->role == 'frelancer'){
-            $users = user_frelancer::where('frelance_id', $user->frelance_id)->get();
+            // Filter portofolio berdasarkan frelance_id user yang sedang login
+            $porto = portofolio::where('frelance_id', $user->frelance_id)
+                               ->with('freelancer')
+                               ->get();
             return view('katalog_portofolio.index', compact('porto'));
         }    
     }
