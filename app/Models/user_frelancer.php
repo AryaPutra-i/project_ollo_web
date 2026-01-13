@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\User as Authenticatable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class user_frelancer extends Authenticatable

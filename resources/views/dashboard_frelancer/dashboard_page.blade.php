@@ -10,9 +10,9 @@
         }
 
         .main-dashboard {
-            margin-top: 50px;
+            /* margin-top: 50px;
             margin-left: 25px;
-            margin-right: 25px;
+            margin-right: 25px; */
             /* display: grid; */
         }
 
@@ -195,8 +195,8 @@
                 <div class="isi-profil">
                     <img src="{{ asset('images/image_profil.JPG') }}" alt="" class="profil-image">
                     <div class="biodata">
-                        <h2 class="nama">Arya Putra Irwansyah</h2>
-                        <h3 class="profesi">Graphic Designer</h3>
+                        <h2 class="nama">{{ auth()->user()->nama_lengkap }}</h2>
+                        <h3 class="profesi">{{ auth()->user()->profesi }}</h3>
                         <p class="link-url">Link Url :
                             <a href="" class="link-asli">https://www.sample.org/plot</a>
                         </p>
@@ -208,8 +208,8 @@
             </div>
             <div class="total-pengerjaan">
                 <div class="isi-total-card">
-                    <h2 class="pengerjaan">80</h2>
-                    <h3 class="subtext">Design Completed</h3>
+                    <h2 class="pengerjaan">{{ $porto->count() }}</h2>
+                    <h3 class="subtext">Portofolio Uploaded</h3>
                 </div>
             </div>
         </header>

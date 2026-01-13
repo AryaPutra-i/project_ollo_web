@@ -36,7 +36,8 @@ class userfrelancerController extends Controller
             'password' => 'required|min:8|max:255|confirmed',
             'email' => 'required|email|unique:user_frelancers',
             'no_telepon' => 'required|unique:user_frelancers|max:16',
-            'profesi'=> 'required'
+            'profesi'=> 'required',
+            'role' => 'frelancer'
 
         ]);
 
@@ -49,7 +50,7 @@ class userfrelancerController extends Controller
             'profesi' => $request->profesi
         ]);
 
-        return redirect('/register/showLogin')->with('success', 'Registrasi berhasil');
+        return redirect('/register/showLogin')->with('success', 'Registrasi berhasil, tunggu di verifikasi');
 
         //
     }
@@ -67,24 +68,45 @@ class userfrelancerController extends Controller
 
         ]);
 
+
+        if(Auth::attempt($credentials)){
+            $user = Auth::user();
+            
+            if(!$user->status && $user->role !== 'admin'){
+                Auth::logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+                return back()->with('loginError', 'Akun anda masih dalam proses verifikasi');
+            }
+                
+            $request->session()->regenerate();
+            
+            if($user->role == 'admin'){
+                return redirect('/register/dashboardAdmin');
+            }
+                
+            return redirect()->intended('/dashboard/posts');
+
+            
+        }
         // dd($credentials);
-        $user = user_frelancer::where('email', $request->email)->first();
+        // $user = user_frelancer::where('email', $request->email)->first();
         
-        if (!$user || !Hash::check($request->password, $user->password)) {
-            return back()->withErrors([
-                'email' => 'The provided credentials do not match our records.',
-            ])->onlyInput('email');
-        }
+        // if (!$user || !Hash::check($request->password, $user->password)) {
+        //     return back()->withErrors([
+        //         'email' => 'The provided credentials do not match our records.',
+        //     ])->onlyInput('email');
+        // }
 
-        // Check if account is approved
-        if (!$user->status) {
-            return back()->with('email', 'Your account is not approved yet. Please wait for admin verification.');
-        }
+        // // Check if account is approved
+        // if (!$user->status) {
+        //     return back()->with('email', 'Your account is not approved yet. Please wait for admin verification.');
+        // }
 
-        // Login user
-        Auth::login($user);
-        $request->session()->regenerate();
-        return redirect()->intended('/dashboard/posts');
+        // // Login user
+        // Auth::login($user);
+        // $request->session()->regenerate();
+        // return redirect()->intended('/dashboard/posts');
     }
 
 
@@ -122,17 +144,30 @@ class userfrelancerController extends Controller
 
     public function viewDashboardAdmin(){
 
+        if(Auth::user()->role !== 'admin'){
+            abort(403, 'Unauthorized action');
+        }
+
         $approvedFrelancers = user_frelancer::where('status', true)->get();
         return view('dashboard_admin.main_panel.index', compact('approvedFrelancers'));
     }
 
     public function viewVerfikasiUser(){
+
+        if(Auth::user()->role !== 'admin'){
+            abort(403, 'Unauthorized action');
+        }
+
         $userFrelance = user_frelancer::all();
         return view('dashboard_admin.main_panel.verifikasiUser', compact('userFrelance'));
     }
 
       public function approve($id)
     {
+        if(Auth::user()->role !== 'admin'){
+            abort(403, 'Unauthorized action');
+        }    
+
         $freelancer = user_frelancer::find($id);
         $freelancer->update(['status' => true]);
         return redirect()->back()->with('success', 'Account approved');
@@ -140,6 +175,10 @@ class userfrelancerController extends Controller
 
     public function reject($id)
     {
+        if(Auth::user()->role !== 'admin'){
+            abort(403, 'Unauthorized action');
+        }
+
         $freelancer = user_frelancer::find($id);
         $freelancer->update(['status' => false]);
         return redirect()->back()->with('success', 'Account rejected');
@@ -149,7 +188,7 @@ class userfrelancerController extends Controller
         Auth::logout();
 
         $request->session()->invalidate();
-        $request->session()->regenerate();
+        $request->session()->regenerateToken();
         return redirect('/register/showLogin');
     }
 }

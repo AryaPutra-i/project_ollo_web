@@ -20,6 +20,7 @@ return new class extends Migration
             $table->biginteger('no_telepon')->unique();
             $table->string('profesi');
             $table->boolean('status')->default(false);
+            $table->string('role')->default('frelancer');
             $table->timestamps();
         });
     }

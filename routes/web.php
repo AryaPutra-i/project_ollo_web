@@ -25,11 +25,9 @@ Route::get('/dashboard/posts/show', function () {
 
 
 Route::get('/dashboard/posts/checkSlug', [portofolioController::class, 'checkSlug']);
-Route::resource('/dashboard/posts', portofolioController::class);
+Route::middleware(['auth'])->group(function () {
+    Route::resource('/dashboard/posts', portofolioController::class);
+});
 
 
 Route::get('/katalog', [portofolioController::class, 'viewWrapper'])->name('katalog');
-
-
-
-

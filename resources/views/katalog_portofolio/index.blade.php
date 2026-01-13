@@ -21,7 +21,8 @@
             color: white;
             filter: brightness(100%);
             font-weight: bold;
-            font-size: 40px;
+            font-size: 50px;
+            text-transform: uppercase;
 
         }
 
@@ -29,6 +30,7 @@
             font-family: 'poppins', sans-serif;
             color: white;
             filter: brightness(100%);
+            text-transform: uppercase;
         }
 
         .tombol {
@@ -38,12 +40,13 @@
             text-align: center;
             font-family: "poppins", sans-serif;
             font-weight: bold;
-            margin-top: 30px;
+            margin-top: 10px;
         }
 
         .deskripsi {
             justify-content: first;
             align-items: center;
+            
         }
 
         body {
@@ -52,8 +55,8 @@
     </style>
     <div class="isi_hero px-5 px-md-5">
         <div class="deskripsi ">
-            <h1 class="name">Arya Putra Irwansyah</h1>
-            <h2 class="profesi">Graphic designer</h2>
+            <h1 class="name">{{ auth()->user()->nama_lengkap }}</h1>
+            <h2 class="profesi">{{ auth()->user()->profesi }}</h2>
             <button type="button" class="btn btn-primary btn-lg tombol">Booking Design</button>
         </div>
     </div>
@@ -65,13 +68,14 @@
             display: flex;
             flex-direction: column;
             font-family: "poppins", sans-serif;
-            color: #221153;
+            color: #5a3faa;
 
         }
 
         .title_my_design {
             font-weight: bold;
-            font-size: 40px;
+            font-size: 50px;
+            /* text-transform: uppercase; */
 
         }
 
@@ -88,7 +92,9 @@
         }
 
         .design_aku {
-            width: 740px;
+            /* width: 740px; */
+            height: 780px;
+            object-fit: cover;
             border-radius: 10px;
         }
 
@@ -149,8 +155,8 @@
 
     </style>
     <div class="slide_porto d-xxl-flex px-5 px-md-5 mt-5">
-        <h1 class="title_my_design">My Design</h1>
-        <h2 class="subtitle_my_design">Ini adalah hasil karya saya</h2>
+        <h1 class="title_my_design"> My portofolio</h1>
+        {{-- <h2 class="subtitle_my_design">Ini adalah hasil karya saya</h2> --}}
     </div>
 
     <div class="card_item px-5 px-md-5 mt-3 swiper myswiper">

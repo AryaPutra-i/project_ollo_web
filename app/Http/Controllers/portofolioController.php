@@ -7,6 +7,7 @@ use App\Models\portofolio;
 use App\Models\user_frelancer;
 use Illuminate\Support\Facades\Storage;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
+use Illuminate\Support\Facades\Auth;
 
 
 class portofolioController extends Controller
@@ -16,9 +17,15 @@ class portofolioController extends Controller
      */
     public function index()
     {
-        return view('dashboard_frelancer.dashboard_page', [
-            'porto' => portofolio::all()
-        ]);
+
+        $user = Auth::user();
+        if ($user->role !== 'frelancer'){
+            abort(403, 'hanya frelancer yang bisa mengakses dashboard ini');
+        }
+        $porto = portofolio::where('frelance_id', $user->frelance_id)->get();
+        
+
+        return view('dashboard_frelancer.dashboard_page', compact('porto'));
     }
 
     /**
@@ -126,9 +133,19 @@ class portofolioController extends Controller
      */
     public function destroy($id)
     {
+        $portofolio = portofolio::findOrFail($id);
 
+        // Authorization: Ensure the freelancer owns this portfolio
+        if ($portofolio->frelance_id !== Auth::user()->frelance_id) {
+            abort(403, 'Unauthorized action.');
+        }
 
-        portofolio::destroy($id);
+        // Delete the image file from storage if it exists
+        if ($portofolio->image) {
+            Storage::delete($portofolio->image);
+        }
+
+        $portofolio->delete();
         return redirect('/dashboard/posts')->with('success', 'design berhasil terhapus');
     }
 
@@ -140,7 +157,11 @@ class portofolioController extends Controller
 
     public function viewWrapper()
     {
+        $user = Auth::user();
         $porto = portofolio::all();
-        return view('katalog_portofolio.index', compact('porto'));
+        if ($user->role == 'frelancer'){
+            $users = user_frelancer::where('frelance_id', $user->frelance_id)->get();
+            return view('katalog_portofolio.index', compact('porto'));
+        }    
     }
 }

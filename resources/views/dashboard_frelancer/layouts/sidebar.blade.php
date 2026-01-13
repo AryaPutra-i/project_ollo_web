@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -17,356 +18,141 @@
             padding: 0;
         }
 
-        .container-content {
-            display: flex;
-            /* position: fixed; */
-
-            
-            
-            
-        }
-
         .sidebar {
-            background-color: #2C2C2C;
-            width: 268px;
-            height: 120vh;
-            /* width: 87px; */
-            padding: 20px;
-            display: flex;
-            /* flex-direction: row; */
-            /* position: fixed; */
-            box-sizing: border-box;
-            transition: all ease-in 0.3s;
-            /* overflow: auto; */
-
-           
-        }
-
-
-        .sidebar.hide{
-            width: 85px;
-            transition: all ease-out 0.3s;
-            /* position: sticky; */
-        }
-
-        .sidebar .description-header {
-            font-weight: bold;
-            font-size: 14px;
-            line-height: 16px;
-            text-align: center;
-            color: #FFFFFF;
-
-        }
-
-        .sidebar.hide .description-header {
-            display: none;
-        }
-
-
-        .sidebar a {
-            text-decoration: none;
-        }
-
-        .list-item .icon {
-            width: 30px;
-            margin-bottom: 8px;
-            margin-left: -2px;
-            /* margin-right: 12px; */
-            align-items: center;
-            justify-items: center
-
-        }
-
-        .sidebar .header .list-item {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            padding: 12px 10px;
-            border-radius: 8px;
-            height: 40px;
-            box-sizing: border-box;
-            margin-bottom: 12px;
-        }
-
-        .sidebar .header .list-item .icon {
-            margin-right: 8px;
-        }
-
-        .sidebar .header .logo-ollo .logo {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            padding: 10px;
-            margin: 12px 0 25px 0;
-            box-sizing: border-box;
-            width: 212px;
-
-        }
-
-        .sidebar.hide .logo-ollo .logo {
-            display: none;
-        }
-
-
-        .sidebar .main-sidebar .list-item .description {
-            font-weight: 700;
-            font-size: 16px;
-            line-height: 16px;
-            text-align: center;
-            color: #FFFFFF;
-        }
-
-        .sidebar.hide .main-sidebar .list-item .description {
-            display: none;
-        }
-
-
-        .sidebar .main-sidebar .list-item .icon-menu{
-            margin-right: 8px;
-            width: 25px;
-        }
-
-        .sidebar .main-sidebar .list-item {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            padding: 12px 10px ;
-            border-radius: 5px;
-            /* width: 212px; */
-            box-sizing: border-box;
-            margin-bottom: 12px;
-        }
-
-        .sidebar .main-sidebar .list-item:hover {
-             background-color: #7C4DFF;
-             transition: all ease-in .2s;
-        }
-
-        /* main panel */
-        .main-panel {
-            width: 100vw; 
+            position: fixed;
+            top: 0;
+            left: 0;
             height: 100%;
+            width: 220px;
+            padding-top: 25px;
+            background-color: #2C2C2C;
+            transition: width 0, 3ss;
+        }
+
+        .sidebar .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 20px;
+            color: white;
+        }
+
+        .sidebar .deskripsi {
+            font-size: 16px;
+            font-family: 'poppins', sans-serif;
+        }
+
+        .sidebar .logo-img {
+            display: flex;
+            justify-content: center;
+        }
+
+        .sidebar .logo {
+            width: 180px;
+            margin-bottom: 25px;
+            margin-top: 15px;
+
+        }
+
+        .sidebar .nav-link:hover {
+            background-color: #7C4DFF;
+        }
+
+        .sidebar .nav-link.active {
+            background-color: #7C4DFF;
+            /* border-left: 4px solid #FFD700; */
+        }
+
+        .main-content {
+            height: 100vh;
+            margin-left: 220px;
             padding: 20px;
-            /* overflow: hidden; */
-            /* box-sizing: border-box; */
+            /* background-size: cover;  */
         }
 
-       
-
-        /* toogle menu */
-        #menu-button {
-            width: 32px;
-            position: absolute;
-            overflow: hidden;
-            margin: 12px;
-        }
-
-        #menu-label{
-            position: relative;
-            display: block;
-            height: 20px;
-            cursor: pointer;
-        }
-
-        #menu-checkbox{
-            display: none;
-        }
-
-        #hamburger, #menu-label:after, #menu-label:before{
-            position: absolute;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background-color:#2C2C2C;
-            /* background-color:#ffffff; */
-
-        }
-
-        #menu-label:after, #menu-label:before{
-            content: "";
-            transition: 0.4s cubic-bezier(0.075, 0.82, 0.165, 1) left;
-        }
-
-        #menu-label:before{
-            top:o;
-        }
-
-        #menu-label:after{
-            top: 8px;
-        }
-
-        #hamburger{
-            top: 16px;
-        }
-
-        #hamburger:before{
-            content: "MENU";
-            position: absolute;
-            top: 5px;
-            right: 0;
-            left: 0;
-            color: #2C2C2C;
-            font-size: 10px;
-            font-weight: bold;
-            text-align: center;
-        }
-
-        #menu-checkbox:checked + #menu-label::before {
-            left: -39px;
-        }
-
-        #menu-checkbox:checked + #menu-label::after{
-            left: 39px;
-        }
-
-        #menu-checkbox:checked + #menu-label #hamburger::before{
-            animation: moveUpThenDown 0.8s ease 0.2s forwards,
-            shakeUp 0.8s ease 0.2s forwards, 
-            shakeDown 0.2s ease 0.8s forwards;
-        }
-
-       
-
-       
-
-        @keyframes moveUpThenDown{
-            0%{
-                top: 0;
+        @media (max-width: 480px) {
+            .sidebar {
+                width: 65px;
             }
-            50%{
-                top: -27px;
+
+            .sidebar .deskripsi {
+                display: none;
             }
-            100%{
-                top: -14px;
+
+            .main-content {
+                margin-left: 65px;
             }
-            
+
+            .sidebar .logo {
+                display: none;
+            }
         }
-
-        @keyframes shakeUp{
-            0%{
-                transform: rotate(0);
-            }
-            25%{
-                transform: rotateZ(-10deg);
-            }
-            50%{
-                transform: rotateZ(0);
-            }
-            75%{
-                transform: rotateZ(10deg);
-            }
-            100%{
-                transform: rotateZ(0)
-            }
-            
-        }
-
-        @keyframes shakeDown{
-            0%{
-                transform: rotateZ(0);
-            }
-            80%{
-                transform: rotateZ(3deg);
-            }
-            90%{
-                transform: rotateZ(-3deg);
-            }
-            100%{
-                transform: rotateZ(0);
-            }
-  
-        }
-
-
     </style>
 </head>
 
 <body>
-    <div class="container-content">
-        <div class="sidebar" >
-            <div class="header">
-                <div class="list-item ">
-                    <a href="#" >
-                        <img src="{{ asset('images/portofolio.png') }}" alt="" class="icon">
-                        <span class="description-header">Online Look & Order</span>
-                    </a>
-                </div>
+    <div class="sidebar">
+        <div class="nav flex-column">
 
-                <div class="logo-ollo">
-                    <a href="{{ route('katalog') }}">
+            <a href="{{ route('katalog') }}" class="logo-img">
+                <img src="{{ asset('images/logo ollo.png') }}" alt="" class="logo">
+            </a>
+            <a href="/dashboard/posts" class="nav-link">
+                <span data-feather="grid"></span>
+                <span class="deskripsi">Dashboard</span>
+            </a>
+            <a href="#" class="nav-link">
+                <span data-feather="book"></span>
+                <span class="deskripsi">History</span>
+            </a>
+            <a href="#" class="nav-link">
+                <span data-feather="bar-chart"></span>
+                <span class="deskripsi">Rating</span>
+            </a>
+            
+            <a href="#" class="nav-link">
+                <span data-feather="calendar"></span>
+                <span class="deskripsi">Schedule</span>
+            </a>
+            <a href="#" class="nav-link">
+                <span data-feather="list"></span>
+                <span class="deskripsi">Order List</span>
+            </a>
+            
+            <a href="#" class="nav-link">
+                <span data-feather="settings"></span>
+                <span class="deskripsi">Settings</span>
+            </a>
 
-                        <img src="{{ asset('images/logo ollo.png') }}" alt="" class="logo">
-                    </a>
-                </div>
-                <div class="main-sidebar">
-                    <div class="list-item {{ Request::is('dashboard/posts')? 'active' : '' }}">
-                        <a href="/dashboard/posts" >
-                            <img src="{{ asset('images/dashboard.png') }}" alt="" class="icon-menu">
-                            <span class="description">Dashboard</span>
-                        </a>
-                    </div>
-                    <div class="list-item">
-                        <a href="#" >
-                            <img src="{{ asset('images/history.png') }}" alt="" class="icon-menu">
-                            <span class="description">History</span>
-                        </a>
-                    </div>
-                    <div class="list-item">
-                        <a href="#">
-                            <img src="{{ asset('images/rate.png') }}" alt="" class="icon-menu">
-                            <span class="description">Rating</span>
-                        </a>
-                    </div>
-                    <div class="list-item">
-                        <a href="#">
-                            <img src="{{ asset('images/calendar.png') }}" alt="" class="icon-menu">
-                            <span class="description">Schedule</span>
-                        </a>
-                    </div>
-                    <div class="list-item">
-                        <a href="#">
-                            <img src="{{ asset('images/clipboard.png') }}" alt="" class="icon-menu">
-                            <span class="description">Order List</span>
-                        </a>
-                    </div>
-                    <div class="list-item">
-                        <a href="#">
-                            <img src="{{ asset('images/setting.png') }}" alt="" class="icon-menu">
-                            <span class="description">Settings</span>
-                        </a>
-                    </div>
-                </div>
+            <a href="{{ route('logout') }}" class="nav-link"
+                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <span data-feather="log-out"></span>
+                <span class="deskripsi">
+                    Logout
+                </span>
+            </a>
 
-            </div>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;"> @csrf</form>
 
-        </div>
-        <div class="main-content">
-            <div id="menu-button">
-                <input type="checkbox" id="menu-checkbox">
-                <label for="menu-checkbox" id="menu-label">
-                    <div id="hamburger"></div>
-                </label>
-                
-            </div>
-        </div>
-        <div class="main-panel">
-            @yield('dashboard-panel')
         </div>
     </div>
 
+    <div class="main-content mt-2">
+        @yield('dashboard-panel')
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
+    </script>
     <script>
-        const menu = document.getElementById('menu-label');
-        const sidebar = document.getElementsByClassName('sidebar')[0];
-
-        menu.addEventListener('click', function(){
-            sidebar.classList.toggle('hide');
-            console.log('ok')
-        })
-
-        feather.replace();          
+        feather.replace();
     </script>
 
-    
+
+
+
 </body>
 
 </html>
