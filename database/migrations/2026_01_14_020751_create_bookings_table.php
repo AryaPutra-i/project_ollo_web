@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->id('booking_id');
             $table->string('name_customer');
-            $table->integer('phone_customer');
+            $table->bigInteger('phone_customer');
             $table->string('judul_booking');
             $table->string('detail');
             $table->double('harga');

@@ -280,7 +280,7 @@
         <h1 class="page-title">Order Details</h1>
 
         <div class="order-card">
-            <h2 class="client-name" id="client-name">{{ $booking->name_customer }}</h2>
+            <h2 class="client-name" id="client-name">{{$booking->name_customer}}</h2>
 
             <div class="detail-grid">
                 <div class="detail-item">
@@ -352,58 +352,7 @@
         const referenceFile = localStorage.getItem('orderReferenceFile');
         const referenceFileName = localStorage.getItem('orderReferenceFileName');
         
-        if (orderData) {
-            const data = JSON.parse(orderData);
-            
-            // Populate all fields
-            if (data.full_name) document.getElementById('client-name').textContent = data.full_name;
-            if (data.phone_number) document.getElementById('phone-number').textContent = data.phone_number;
-            if (data.email) document.getElementById('email').textContent = data.email;
-            if (data.title) document.getElementById('title').textContent = data.title;
-            if (data.description) document.getElementById('description').textContent = data.description;
-            
-            if (data.deadline) {
-                const date = new Date(data.deadline);
-                document.getElementById('deadline').textContent = date.toLocaleDateString('id-ID');
-            }
-            
-            if (data.budget) {
-                document.getElementById('budget').textContent = 'Rp ' + parseInt(data.budget).toLocaleString('id-ID');
-            }
-            
-            // Handle reference
-            const referenceContent = document.getElementById('reference-content');
-            
-            if (referenceFile) {
-                // Check if it's an image
-                if (referenceFileName && referenceFileName.match(/\.(jpg|jpeg|png|gif|webp)$/i)) {
-                    referenceContent.innerHTML = `
-                        <img src="${referenceFile}" alt="Reference" class="reference-image">
-                    `;
-                } else {
-                    referenceContent.innerHTML = `
-                        <div style="text-align: center; padding: 20px; background: #f5f3ff; border-radius: 12px;">
-                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin: 0 auto 12px; color: #8b5cf6;">
-                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <polyline points="14 2 14 8 20 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                            <div style="color: #5b21b6; font-weight: 700; margin-bottom: 4px;">${referenceFileName}</div>
-                            <div style="color: #9f7aea; font-size: 14px;">File berhasil diupload</div>
-                        </div>
-                    `;
-                }
-            } else if (data.reference_link) {
-                referenceContent.innerHTML = `
-                    <a href="${data.reference_link}" class="reference-link" target="_blank">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        Lihat Referensi
-                    </a>
-                `;
-            }
-        }
+       
     });
 </script>
 @endsection

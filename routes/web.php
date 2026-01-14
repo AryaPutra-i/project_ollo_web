@@ -25,12 +25,12 @@ Route::get('/dashboard/posts/show', function () {
     return view('dashboard_frelancer.posts.show');
 });
 
+Route::get('/booking/index', [BookingController::class, 'index'])->name('booking.index');
 Route::resource('/booking', BookingController::class);
 
 Route::get('/dashboard/posts/checkSlug', [portofolioController::class, 'checkSlug']);
 Route::middleware(['auth'])->group(function () {
     Route::resource('/dashboard/posts', portofolioController::class);
 });
-
 
 Route::get('/katalog', [portofolioController::class, 'viewWrapper'])->name('katalog');

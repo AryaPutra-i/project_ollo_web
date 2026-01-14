@@ -12,7 +12,9 @@ class BookingController extends Controller
      */
     public function index()
     {
-        //
+        // Ambil booking terbaru saja (bukan koleksi) agar view detail tidak error
+        $booking = Booking::latest('created_at')->firstOrFail();
+        return view('booking.show', compact('booking'));
     }
 
     /**
@@ -46,16 +48,18 @@ class BookingController extends Controller
             $validatedData['referensi_file'] = $request->file('referensi_file')->store('referensi_file');
         }
 
-        $request->user()->bookings()->create($validatedData);
-        return redirect('/booking/show')->with('success', 'booking berhasil');
+        $booking = $request->user()->bookings()->create($validatedData);
+        // Arahkan ke halaman detail booking yang baru dibuat
+        return redirect('/booking/' . $booking->booking_id)->with('success', 'booking berhasil');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Booking $booking)
+    public function show($booking_id)
     {
-        return view('booking.show');
+        $booking = Booking::findOrFail($booking_id);
+        return view('booking.show', compact('booking'));
     }
 
     /**
