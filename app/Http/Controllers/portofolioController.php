@@ -48,6 +48,7 @@ class portofolioController extends Controller
             'image' => 'required|image|file|max:10240'
         ]);
 
+        // dd($validatedData);
         $validatedData['image'] = $request->file('image')->store('post-images');
         
         $request->user()->portofolios()->create($validatedData);

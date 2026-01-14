@@ -150,7 +150,7 @@
     .upload-area {
         border: 3px dashed #ddd6fe;
         border-radius: 16px;
-        padding: 40px 28px;
+        padding: 20px 14px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -185,7 +185,7 @@
 
     .upload-area svg {
         width: 56px;
-        height: 56px;
+        height: 36px;
         position: relative;
         z-index: 1;
         filter: drop-shadow(0 4px 8px rgba(139, 92, 246, 0.2));
@@ -352,54 +352,73 @@
         </div>
 
 
-        <form action="{{ route('orders.show') }}" method="GET" autocomplete="off">
+        <form method="POST" action="/booking"  enctype="multipart/form-data">
+            @csrf
             <div class="form-row">
                 <div class="form-group">
-                    <label for="full_name">Full Name</label>
-                    <input id="full_name" name="full_name" type="text" placeholder="Budi Santoso" required>
+                    <label for="name_customer">Nama lengkap</label>
+                    <input id="name_customer" name="name_customer" type="text" placeholder="Budi Santoso" class="@error('name_customer') is-invalid @enderror" value="{{ old('name_customer') }}" required>
+                    @error('name_customer')
+                        <span class="text-danger" style="font-size: 12px; margin-top: 5px; color: #e53e3e;">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <div class="form-group">
-                    <label for="phone_number">Phone Number</label>
-                    <input id="phone_number" name="phone_number" type="tel" placeholder="08123456789" required>
+                    <label for="phone_customer">Phone Number</label>
+                    <input id="phone_customer" name="phone_customer" type="tel" placeholder="08123456789" class="@error('phone_customer') is-invalid @enderror" value="{{ old('phone_customer') }}" required>
+                    @error('phone_customer')
+                        <span class="text-danger" style="font-size: 12px; margin-top: 5px; color: #e53e3e;">{{ $message }}</span>
+                    @enderror
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input id="email" name="email" type="email" placeholder="Ollo@gmail.com" required>
+                    <label for="judul_booking">Judul Project</label>
+                    <input id="judul_booking" name="judul_booking" type="text" placeholder="Design poster" class="@error('judul_booking') is-invalid @enderror" value="{{ old('judul_booking') }}" required>
+                    @error('judul_booking')
+                        <span class="text-danger" style="font-size: 12px; margin-top: 5px; color: #e53e3e;">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <div class="form-group">
-                    <label for="title">Project Title</label>
-                    <input id="title" name="title" type="text" placeholder="Desain Poster" required>
+                    <label for="detail">Detail project</label>
+                    <input id="detail" name="detail" type="text" placeholder="Untuk Bisnis" class="@error('detail') is-invalid @enderror" value="{{ old('detail') }}" required>
+                    @error('detail')
+                        <span class="text-danger" style="font-size: 12px; margin-top: 5px; color: #e53e3e;">{{ $message }}</span>
+                    @enderror
                 </div>
             </div>
 
             <div class="form-row full">
                 <div class="form-group">
-                    <label for="description">Project Description</label>
-                    <textarea id="description" name="description" placeholder="Jelaskan detail kebutuhan project Anda..." required></textarea>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="deadline">Deadline</label>
-                    <input id="deadline" name="deadline" type="date" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="budget">Budget (Rp)</label>
-                    <input id="budget" name="budget" type="number" min="0" step="10000" placeholder="1000000" required>
+                    <label for="harga">Type Paket</label>
+                    <select name="harga" id="harga" class="@error('harga') is-invalid @enderror" required>
+                        <option value="">Pilih Paket</option>
+                        <option value="300000" {{ old('harga') == '300000' ? 'selected' : '' }}>Paket 1 : 300.000</option>
+                        <option value="450000" {{ old('harga') == '450000' ? 'selected' : '' }}>Paket 2 : 450.000</option>
+                        <option value="600000" {{ old('harga') == '600000' ? 'selected' : '' }}>paket combo : 600.000</option>
+                    </select>
+                    @error('harga')
+                        <span class="text-danger" style="font-size: 12px; margin-top: 5px; color: #e53e3e;">{{ $message }}</span>
+                    @enderror
                 </div>
             </div>
 
             <div class="form-row full">
                 <div class="form-group">
-                    <label for="reference">Referensi (Opsional)</label>
-                    <input type="file" id="reference" name="reference" accept="image/*,.pdf,.doc,.docx" style="display: none;">
+                    <label for="dateline">dateline</label>
+                    <input id="dateline" name="dateline" type="date" class="@error('dateline') is-invalid @enderror" value="{{ old('dateline') }}" required>
+                    @error('dateline')
+                        <span class="text-danger" style="font-size: 12px; margin-top: 5px; color: #e53e3e;">{{ $message }}</span>
+                    @enderror
+                </div>
+            </div>
+
+            <div class="form-row full">
+                <div class="form-group">
+                    <label for="referensi_file">Referensi (Opsional)</label>
+                    <input type="file" id="reference" name="referensi_file" style="display: none;">
                     <div class="upload-area" role="button" aria-label="Upload referensi" onclick="document.getElementById('reference').click()">
                         <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path d="M32 8v28" stroke="currentColor" stroke-width="4" stroke-linecap="round" />
@@ -407,8 +426,11 @@
                             <rect x="14" y="36" width="36" height="16" rx="4" stroke="currentColor" stroke-width="4" />
                         </svg>
                         <div class="upload-area-text" id="upload-text">Upload File</div>
-                        <div class="upload-area-hint">PDF, DOC, atau Gambar (Max 5MB)</div>
+                        <div class="upload-area-hint">jpeg, png, jpg (Max 10MB)</div>
                     </div>
+                    @error('referensi_file')
+                        <span class="text-danger" style="font-size: 12px; margin-top: 5px; color: #e53e3e;">{{ $message }}</span>
+                    @enderror
                     <div id="image-preview" style="display: none; margin-top: 16px; text-align: center;">
                         <img id="preview-img" src="" alt="Preview" style="max-width: 100%; max-height: 300px; border-radius: 12px; box-shadow: 0 8px 20px rgba(139, 92, 246, 0.2);">
                         <div style="margin-top: 12px; color: #8b5cf6; font-weight: 600;" id="file-name"></div>
@@ -418,8 +440,11 @@
 
             <div class="form-row full">
                 <div class="form-group">
-                    <label for="reference_link">Atau Link Referensi</label>
-                    <input id="reference_link" name="reference_link" type="url" placeholder="https://example.com/referensi">
+                    <label for="referensi_link">Atau Link Referensi</label>
+                    <input id="referensi_link" name="referensi_link" type="url" placeholder="https://example.com/referensi" class="@error('referensi_link') is-invalid @enderror" value="{{ old('referensi_link') }}">
+                    @error('referensi_link')
+                        <span class="text-danger" style="font-size: 12px; margin-top: 5px; color: #e53e3e;">{{ $message }}</span>
+                    @enderror
                 </div>
             </div>
 
@@ -457,9 +482,7 @@
             reader.onload = function(e) {
                 const result = e.target.result;
                 
-                // Store in localStorage
-                localStorage.setItem('orderReferenceFile', result);
-                localStorage.setItem('orderReferenceFileName', file.name);
+               
                 
                 // Show preview for images
                 if (file.type.startsWith('image/')) {
@@ -475,27 +498,6 @@
         }
     });
 
-    // Handle form submit
-    document.querySelector('form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Get all form values
-        const formData = {
-            full_name: document.getElementById('full_name').value,
-            phone_number: document.getElementById('phone_number').value,
-            email: document.getElementById('email').value,
-            title: document.getElementById('title').value,
-            description: document.getElementById('description').value,
-            deadline: document.getElementById('deadline').value,
-            budget: document.getElementById('budget').value,
-            reference_link: document.getElementById('reference_link').value
-        };
-        
-        // Store in localStorage
-        localStorage.setItem('orderData', JSON.stringify(formData));
-        
-        // Redirect to detail page
-        window.location.href = '{{ route("orders.show") }}';
-    });
+   
 </script>
 @endsection

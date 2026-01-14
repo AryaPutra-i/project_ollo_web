@@ -16,4 +16,8 @@ class user_frelancer extends Authenticatable
     public function portofolios(){
         return $this->hasMany(portofolio::class, 'frelance_id', 'frelance_id');
     }
+
+    public function bookings(){
+        return $this->hasMany(Booking::class, 'frelane_id', 'frelance_id');
+    }
 }

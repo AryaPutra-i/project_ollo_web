@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\portofolioController;
 use App\Http\Controllers\userfrelancerController;
+use App\Http\Controllers\BookingController;
+
 
 Route::get('/', function () {
     return view('Login_register.welcome');
@@ -23,10 +25,7 @@ Route::get('/dashboard/posts/show', function () {
     return view('dashboard_frelancer.posts.show');
 });
 
-route::get('/booking', function () {
-    return view ('booking.show');
-}); 
-
+Route::resource('/booking', BookingController::class);
 
 Route::get('/dashboard/posts/checkSlug', [portofolioController::class, 'checkSlug']);
 Route::middleware(['auth'])->group(function () {

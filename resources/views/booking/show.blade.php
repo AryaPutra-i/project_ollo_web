@@ -280,44 +280,50 @@
         <h1 class="page-title">Order Details</h1>
 
         <div class="order-card">
-            <h2 class="client-name" id="client-name">Ahmad Mubarok Siregar</h2>
+            <h2 class="client-name" id="client-name">{{ $booking->name_customer }}</h2>
 
             <div class="detail-grid">
                 <div class="detail-item">
                     <div class="detail-label">Phone Number</div>
-                    <div class="detail-value" id="phone-number">0871276452</div>
+                    <div class="detail-value" id="phone-number">{{ $booking->phone_customer }}</div>
                 </div>
 
                 <div class="detail-item">
-                    <div class="detail-label">Email</div>
-                    <div class="detail-value" id="email">Ollo@gmail.com</div>
+                    <div class="detail-label">Judul Project</div>
+                    <div class="detail-value" id="title">{{ $booking->judul_booking }}</div>
                 </div>
 
                 <div class="detail-item">
-                    <div class="detail-label">Judul</div>
-                    <div class="detail-value" id="title">Foto Preweding</div>
+                    <div class="detail-label">Freelancer</div>
+                    <div class="detail-value" id="freelancer">{{ $booking->freelancerUser->nama_lengkap }}</div>
                 </div>
 
                 <div class="detail-item">
                     <div class="detail-label">Deskripsi</div>
-                    <div class="detail-value description" id="description">desain ini seperti poster</div>
+                    <div class="detail-value description" id="description">{{ $booking->detail }}</div>
                 </div>
 
                 <div class="detail-item">
                     <div class="detail-label">Deadline</div>
-                    <div class="detail-value" id="deadline">2/12/2026</div>
+                    <div class="detail-value" id="deadline">{{ \Carbon\Carbon::parse($booking->dateline)->format('d/m/Y') }}</div>
                 </div>
 
                 <div class="detail-item">
-                    <div class="detail-label">Budget</div>
-                    <div class="detail-value" id="budget">Rp 2.000.000</div>
+                    <div class="detail-label">Harga</div>
+                    <div class="detail-value" id="budget">Rp {{ number_format($booking->harga, 0, ',', '.') }}</div>
                 </div>
             </div>
 
             <div class="reference-section">
                 <div class="reference-label">Referensi</div>
                 <div id="reference-content">
-                    <div class="no-reference">Tidak ada referensi</div>
+                    @if($booking->referensi_file)
+                        <img src="{{ asset('storage/' . $booking->referensi_file) }}" alt="Reference" class="reference-image">
+                    @elseif($booking->referensi_link)
+                        <a href="{{ $booking->referensi_link }}" class="reference-link" target="_blank">Lihat Referensi</a>
+                    @else
+                        <div class="no-reference">Tidak ada referensi</div>
+                    @endif
                 </div>
             </div>
 

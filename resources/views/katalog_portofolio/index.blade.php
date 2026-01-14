@@ -57,7 +57,7 @@
         <div class="deskripsi ">
             <h1 class="name">{{ auth()->user()->nama_lengkap }}</h1>
             <h2 class="profesi">{{ auth()->user()->profesi }}</h2>
-            <a href="/booking" type="button" class="btn btn-primary btn-lg tombol">Booking Design</a>
+            <a href="{{ route('booking.create') }}" type="button" class="btn btn-primary btn-lg tombol">Booking Design</a>
         </div>
     </div>
 @endsection
